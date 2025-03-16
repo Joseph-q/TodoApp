@@ -1,15 +1,18 @@
+import { TaskResponse } from "../services/interfaces/TaskResponse";
+
 interface Props {
-  title: string;
-  description: string | null | undefined;
+  task: TaskResponse;
+  OnDblClick: (task: TaskResponse) => void;
 }
 
-export default function TaskItem({ title, description }: Props) {
-  function OnDblClick() {}
-
+export default function TaskItem({ task, OnDblClick }: Props) {
   return (
-    <div onDoubleClick={OnDblClick} className="
+    <div
+      onDoubleClick={() => OnDblClick(task)}
+      className="
     bg-white hover:bg-gray-100
-    flex dark:bg-gray-800 p-5 cursor-pointer select-none dark:hover:bg-gray-700">
+    flex dark:bg-gray-800 p-5 cursor-pointer select-none dark:hover:bg-gray-700"
+    >
       <div className="flex items-center h-5">
         <input
           id="helper-checkbox"
@@ -18,15 +21,11 @@ export default function TaskItem({ title, description }: Props) {
         />
       </div>
       <div className="ms-2 text-sm">
-        <label
-          className="font-medium text-gray-900 dark:text-gray-300"
-        >
-          {title}
+        <label className="font-medium text-gray-900 dark:text-gray-300">
+          {task.title}
         </label>
-        <p
-          className="text-xs font-normal text-gray-500 dark:text-gray-400"
-        >
-          {description}
+        <p className="text-xs font-normal text-gray-500 dark:text-gray-400">
+          {task.description}
         </p>
       </div>
     </div>

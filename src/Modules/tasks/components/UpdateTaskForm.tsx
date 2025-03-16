@@ -1,20 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { createTask } from "../services/interfaces/tasks.services";
+import { updateTask } from "../services/interfaces/tasks.services";
+import { TaskResponse } from "../services/interfaces/TaskResponse";
 
 interface Props {
   OnCancel: () => void;
+  task: TaskResponse;
 }
 
-export default function AddTaskForm({ OnCancel }: Props) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+export default function UpdateTaskForm({ OnCancel, task }: Props) {
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description!);
   const [errors, setErrors] = useState({ title: "", description: "" });
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: createTask,
+    mutationFn: updateTask,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
@@ -46,7 +48,7 @@ export default function AddTaskForm({ OnCancel }: Props) {
 
     if (!validateForm()) return;
 
-    mutation.mutate({ title, description });
+    mutation.mutate({ id: task.id, task: { title, description } });
     setTitle("");
     setDescription("");
     OnCancel();
@@ -54,7 +56,7 @@ export default function AddTaskForm({ OnCancel }: Props) {
 
   return (
     <>
-      <h2 className="text-xl font-semibold">Add New Task</h2>
+      <h2 className="text-xl font-semibold">Update Task</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -93,7 +95,7 @@ export default function AddTaskForm({ OnCancel }: Props) {
             type="submit"
             className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
           >
-            Create
+            Update
           </button>
         </div>
       </form>
