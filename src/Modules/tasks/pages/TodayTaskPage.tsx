@@ -1,27 +1,24 @@
-import { useEffect, useState } from "react";
 import HeaderTask from "../components/HeaderTask";
 import TaskItem from "../components/TaskItem";
-import { TaskResponse } from "../services/interfaces/TaskResponse";
-import api from "../../../Shared/core/api";
+import { useQuery } from "@tanstack/react-query";
+import { getTasks } from "../services/interfaces/tasks.services";
 
 export default function TodayTaskPage() {
-  const [tasks, setTasks] = useState<TaskResponse[]>([]);
+  const { data: tasks, isLoading, error } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: getTasks,
+  });
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await api.get("/tasks"); 
-      setTasks(response.data); 
-    };
+  if (isLoading) return <p>Cargando...</p>;
 
-    fetchTasks();
-  }, []);
+  if (error) return <p>Error al cargar las tareas</p>;
 
   return (
     <div className="flex flex-col ml-10 mt-5 mr-10">
       <HeaderTask title="Hoy" total={10}></HeaderTask>
 
       <div className="flex flex-col gap-1 mt-5">
-        {tasks.map((t) => (
+        {tasks!.map((t) => (
           <TaskItem title={t.title} description={t.description}></TaskItem>
         ))}
       </div>

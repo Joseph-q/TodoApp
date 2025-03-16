@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import SideBarLinksList from "../components/SideBarLinksList";
 import TaskListBadges from "../components/TaskListBadges";
 import { Link } from "react-router";
+import AddTaskModal from "../components/AddTaskModal";
 
 interface Props {
   children: ReactNode;
@@ -54,20 +55,21 @@ export default function TaskSideBar({ children }: Props) {
             </Link>
           </header>
 
+          <AddTaskModal></AddTaskModal>
+          <br />
+
           <SideBarLinksList></SideBarLinksList>
 
           <div className="flex flex-col dark:bg-gray-900 shadow-lg rounded-2xl p-4 mt-5">
             <h3 className="text-2xl font-extrabold mb-2">Completas</h3>
-            <div className="overflow-y-auto flex h-[50vh] flex-col gap-5">
+            <div className="overflow-y-auto flex h-[40vh] flex-col gap-5">
               <TaskListBadges></TaskListBadges>
             </div>
           </div>
         </div>
       </aside>
 
-      <main className="flex-1 p-4 sm:ml-64">
-        {children}
-      </main>
+      <main className="flex-1 p-4 sm:ml-64">{children}</main>
     </div>
   );
 }

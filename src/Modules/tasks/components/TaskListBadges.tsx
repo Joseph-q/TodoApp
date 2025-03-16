@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-import { TaskResponse } from "../services/interfaces/TaskResponse";
 import BadgeTask from "./BadgeTask";
-import api from "../../../Shared/core/api";
+import { getTasks } from "../services/interfaces/tasks.services";
+import { useQuery } from "@tanstack/react-query";
 
 export default function TaskListBadges() {
-  const [tasks, setTasks] = useState<TaskResponse[]>([]);
 
-  useEffect(() => {
-    // Función para obtener las tareas del usuario
-    const fetchTasks = async () => {
-      const response = await api.get("/tasks"); // Endpoint de la API
-      setTasks(response.data); // Guardar los datos de las tareas
-    };
+  const { data: tasks, isLoading, error } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: getTasks,
+  });
 
-    fetchTasks();
-  }, []);
+  if (isLoading) return <p>Cargando...</p>;
 
-  return tasks.map((t) => <BadgeTask title={t.title}></BadgeTask>);
+  if (error) return <p>Error al cargar las tareas</p>;
+
+  return tasks!.map((t) => <BadgeTask title={t.title}></BadgeTask>);
 }
