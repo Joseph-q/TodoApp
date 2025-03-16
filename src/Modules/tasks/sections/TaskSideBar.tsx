@@ -1,20 +1,21 @@
-import { useState } from "react";
-import BadgeTask from "../components/BadgeTask";
-import SideBarLinksList from "../components/SideBarLinksList";
 import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/solid";
+import { ReactNode, useState } from "react";
+import SideBarLinksList from "../components/SideBarLinksList";
+import TaskListBadges from "../components/TaskListBadges";
+import { Link } from "react-router";
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export default function SideBar({ children }: Props) {
+export default function TaskSideBar({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
   return (
-    <>
+    <div className="flex">
       <button
         data-drawer-target="sidebar-multi-level-sidebar"
         data-drawer-toggle="sidebar-multi-level-sidebar"
@@ -40,7 +41,6 @@ export default function SideBar({ children }: Props) {
       </button>
 
       <aside
-        id="default-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } sm:translate-x-0`}
@@ -48,10 +48,10 @@ export default function SideBar({ children }: Props) {
       >
         <div className="h-full px-3 py-4 bg-gray-50 dark:bg-gray-800">
           <header className="mb-8 mt-2">
-            <a className="flex items-center space-x-2 cursor-pointer" href="#">
+            <Link className="flex items-center space-x-2 cursor-pointer" to="/">
               <ArrowLeftStartOnRectangleIcon className="h-6 w-6 " />
               <span className=" font-medium">Log out</span>
-            </a>
+            </Link>
           </header>
 
           <SideBarLinksList></SideBarLinksList>
@@ -59,25 +59,15 @@ export default function SideBar({ children }: Props) {
           <div className="flex flex-col dark:bg-gray-900 shadow-lg rounded-2xl p-4 mt-5">
             <h3 className="text-2xl font-extrabold mb-2">Completas</h3>
             <div className="overflow-y-auto flex h-[50vh] flex-col gap-5">
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
-              <BadgeTask></BadgeTask>
+              <TaskListBadges></TaskListBadges>
             </div>
           </div>
         </div>
       </aside>
-      <main
-        className={`flex-1 transition-all duration-300 ${
-          sidebarOpen ? "ml-0" : "ml-64"
-        }`}
-      >
+
+      <main className="flex-1 p-4 sm:ml-64">
         {children}
       </main>
-    </>
+    </div>
   );
 }

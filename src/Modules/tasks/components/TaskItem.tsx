@@ -1,6 +1,6 @@
 interface Props {
   title: string;
-  description: string;
+  description: string | null | undefined;
 }
 
 export default function TaskItem({ title, description }: Props) {
