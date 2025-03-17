@@ -16,7 +16,7 @@ export default function LoginPage() {
     setError("");
     try {
       await login(user);
-      navigate("/tasks"); // Redirigir después del login exitoso
+      navigate("/tasks/today"); // Redirigir después del login exitoso
     } catch {
       setError("Credenciales incorrectas");
     }

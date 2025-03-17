@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { register, UserAuth } from "../services/auth.service";
-import axios from "axios";
 
 export default function RegisterPage() {
   const [user, setUser] = useState<UserAuth>({ username: "", password: "" });
@@ -17,25 +16,20 @@ export default function RegisterPage() {
     setError("");  // Limpiar errores previos
   
     try {
-      await register(user);  // Llamar a la función de registro
-  
-      // Si la respuesta es correcta, redirigir al login
-      navigate("/login");
-  
-    } catch (err) {
-        if (axios.isAxiosError(err) && err.response) {
-          console.log(err.status)
-        // Si el error es de Axios, verifica el código de estado
-        if (err.response.status != 400) {
-          setError("User already exists");
-        } else {
-          // Si es otro tipo de error de la API, mostrar mensaje genérico
-          setError("Ocurrió un error al registrar el usuario");
-        }
-      } else {
-        // Si el error no es de Axios, es un error genérico
-        setError("Credenciales incorrectas");
+      const res = await register(user);  // Llamar a la función de registro
+
+      
+      if(res.status >=400&& res.status < 500){
+
+        setError(res.data)
+        return
       }
+
+      navigate("/auth/login");
+  
+    } catch {
+       
+        setError("Somenthing goes wrong try again in other moment");
     }
   };
   

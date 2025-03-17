@@ -4,6 +4,7 @@ import SideBarLinksList from "../components/SideBarLinksList";
 import TaskListBadges from "../components/TaskListBadges";
 import { Link } from "react-router";
 import AddTaskModal from "../components/AddTaskModal";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   children: ReactNode;
@@ -15,6 +16,14 @@ export default function TaskSideBar({ children }: Props) {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  const queryClient = useQueryClient(); // Obtiene la instancia de QueryClient
+
+  const logout = () => {
+    localStorage.removeItem("auth");
+    queryClient.clear();
+  };
+
   return (
     <div className="flex">
       <button
@@ -49,7 +58,13 @@ export default function TaskSideBar({ children }: Props) {
       >
         <div className="h-full px-3 py-4 bg-gray-50 dark:bg-gray-800">
           <header className="mb-8 mt-2">
-            <Link className="flex items-center space-x-2 cursor-pointer" to="/">
+            <Link
+              onClick={() => {
+                logout();
+              }}
+              className="flex items-center space-x-2 cursor-pointer"
+              to="/"
+            >
               <ArrowLeftStartOnRectangleIcon className="h-6 w-6 " />
               <span className=" font-medium">Log out</span>
             </Link>

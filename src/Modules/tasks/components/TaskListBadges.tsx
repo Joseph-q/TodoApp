@@ -23,5 +23,5 @@ export default function TaskListBadges() {
 
   if (error) return <p>Error al cargar las tareas</p>;
 
-  return tasks!.map((t) => <BadgeTask task={t}></BadgeTask>);
+  return tasks!.map((t) => <BadgeTask key={t.id} task={t}></BadgeTask>);
 }
