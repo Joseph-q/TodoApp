@@ -15,7 +15,7 @@ import TaskItem from "../components/TaskItem";
 import Modal from "../components/Modal";
 import UpdateTaskForm from "../components/UpdateTaskForm";
 
-export default function TodayTaskPage() {
+export default function AllTaskPage() {
   // Estado para controlar el modal y la tarea seleccionada
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [taskSelect, setTaskSelect] = useState<TaskResponse | null>(null);
@@ -27,14 +27,14 @@ export default function TodayTaskPage() {
   // Query client de react-query
   const queryClient = useQueryClient();
 
-  // Mutation para cambiar el estado de la tarea
-  const mutation = useMutation({
-    mutationFn: changeTaskStatus,
+  const mutationDelete = useMutation({
+    mutationFn: deleteTask,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tasks"] }),
   });
 
-  const mutationDelete = useMutation({
-    mutationFn: deleteTask,
+  // Mutation para cambiar el estado de la tarea
+  const mutation = useMutation({
+    mutationFn: changeTaskStatus,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tasks"] }),
   });
 
@@ -42,7 +42,6 @@ export default function TodayTaskPage() {
   const queryParams: GetTasksQueryParams = {
     page: 1,
     limit: 100,
-    completed: false,
     order: OrderDirection.Desc,
   };
 
@@ -77,7 +76,7 @@ export default function TodayTaskPage() {
 
   return (
     <div className="flex flex-col ml-10 mt-5 mr-10">
-      <HeaderTask title="Hoy" total={tasks!.length}></HeaderTask>
+      <HeaderTask title="All Tasks" total={tasks!.length}></HeaderTask>
       <div className="flex flex-col gap-1 mt-5">
         {tasks!.map((t) => (
           <TaskItem

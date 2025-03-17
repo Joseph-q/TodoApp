@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { updateTask } from "../services/interfaces/tasks.services";
+import { updateTask } from "../services/tasks.services";
 import { TaskResponse } from "../services/interfaces/TaskResponse";
 
 interface Props {

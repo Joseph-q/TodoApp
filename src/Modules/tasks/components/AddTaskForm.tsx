@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { createTask } from "../services/interfaces/tasks.services";
+import { createTask } from "../services/tasks.services";
 
 interface Props {
   OnCancel: () => void;
