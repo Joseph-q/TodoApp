@@ -8,10 +8,10 @@ export default function TaskListBadges() {
 
   const queryParams: GetTasksQueryParams = {
       page: 1,
-      limit: 100,
+      limit: 10,
       completed: true,
-      orderBy:"updatedAt",
-      order: OrderDirection.Asc,
+      orderBy:"UpdatedAt",
+      order: OrderDirection.Desc,
     };
 
   const { data: tasks, isLoading, error } = useQuery({

@@ -21,11 +21,13 @@ export const getTasks = async (
     if (queryParams.completed !== undefined) {
       query.completed = queryParams.completed.toString();
     }
-    if (queryParams.createdAt !== undefined) {
-      query.createdAt = queryParams.createdAt;
-    }
+
     if (queryParams.order !== undefined) {
-      query.order = queryParams.order; // 'order' siempre es obligatorio
+      query.order = queryParams.order;
+    }
+
+    if (queryParams.orderBy !== undefined) {
+      query.orderBy = queryParams.orderBy;
     }
 
     // Construir la cadena de consulta
