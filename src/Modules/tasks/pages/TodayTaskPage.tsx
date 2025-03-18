@@ -77,7 +77,7 @@ export default function TodayTaskPage() {
 
   return (
     <div className="flex flex-col ml-10 mt-5 mr-10">
-      <HeaderTask title="Hoy" total={tasks!.length}></HeaderTask>
+      <HeaderTask title="Today" total={tasks!.length}></HeaderTask>
       <div className="flex flex-col gap-1 mt-5">
         {tasks!.map((t) => (
           <TaskItem
