@@ -105,7 +105,7 @@ export default function HomePage() {
           <div className="text-center">
             <a
               href="/auth/register"
-              className="inline-block px-8 py-3 mt-6 bg-indigo-600 rounded-full text-xl font-semibold text-white hover:bg-indigo-500 dark:bg-indigo-600 dark:text-gray-900 dark:hover:bg-indigo-500 transform hover:scale-105 transition-all duration-200"
+              className="inline-block px-8 py-3 mt-6 bg-indigo-600 rounded-full text-xl font-semibold text-white hover:bg-indigo-500 dark:bg-indigo-600 dark:hover:bg-indigo-500 transform hover:scale-105 transition-all duration-200"
             >
               Register Now ✨
             </a>
