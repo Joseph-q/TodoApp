@@ -1,54 +1,50 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Todo App
 
-Currently, two official plugins are available:
+Esta aplicación es un proyecto frontend desarrollado con **React** y **TypeScript**, utilizando **Vite** como herramienta de construcción.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Dependencias necesarias
 
-## Expanding the ESLint configuration
+#### Routing
+- `react-dom`
+- `react-router`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+#### Estilos e iconos
+- `@heroicons/react`
+- `@tailwindcss/vite`
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+#### Solicitudes HTTP
+- `@tanstack/react-query`
+- `axios`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Esta aplicación también cuenta con un servidor desplegado en **Vercel**, que se comunica mediante una **Web API de C# .NET** con una base de datos **SQL Server**.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+[🔗 ToDo APP desplegada](https://todo-app-seven-pink-62.vercel.app/)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## Ejecutar en local
+
+Sigue estos pasos para ejecutar la aplicación en tu entorno local:
+
+1. **Clona el repositorio:**
+   ```sh
+   git clone https://github.com/Joseph-q/TodoApp
+   ```
+2. **Accede a la carpeta del proyecto:**
+   ```sh
+   cd TodoApp
+   ```
+3. **Instala las dependencias:**
+   ```sh
+   npm install
+   ```
+4. **Inicia la aplicación:**
+   ```sh
+   npm run dev
+   ```
+
+⚠ **Importante:** Asegúrate de estar ejecutando el backend siguiendo los pasos detallados en el siguiente repositorio:
+[🔗 PersonalTasks](https://github.com/Joseph-q/PersonalTasks)
+
